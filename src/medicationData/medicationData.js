@@ -1,22 +1,15 @@
 import _ from 'lodash';
 import masterMedication from './masterMedications';
 
-const header = _.filter( masterMedication, ( item, index ) => {
-  return index === 0;
-} );
-const data = _.filter( masterMedication, ( item, index ) => {
-  return index !== 0;
-} );
+const header = _.filter( masterMedication, ( item, index ) => index === 0 );
+const data = _.filter( masterMedication, ( item, index ) => index !== 0 );
 
 const masterMedications = _.chain( data )
 // map data to header element
-  .map( ( dataVal ) => {
-    return _.chain( header )
+  .map( dataVal => _.chain( header )
     // gets first element of array
       .head()
-      .filter( ( headerVal ) => {
-        return headerVal !== '';
-      } )
+      .filter( headerVal => headerVal !== '' )
       // (headerVal) => !headerVal
 
       // acc array to iterate over
@@ -29,8 +22,9 @@ const masterMedications = _.chain( data )
         return acc;
       }, {} )
       // _.chain is a wrapper instance. .value() unwraps the result of the sequences made
-      .value();
-  } )
+      .value() )
   .value();
+
+console.log( masterMedication );
 
 export default masterMedications;
